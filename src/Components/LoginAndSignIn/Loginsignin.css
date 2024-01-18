@@ -1,0 +1,90 @@
+.loginandsignin {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+    
+.login--header {
+    margin: 2rem;
+}
+
+.login--header h1 {
+    font-size: 4rem;
+    color: blue;
+}
+
+.login--header p {
+    margin: 2rem 0 0 3rem;
+    font-size: 1.8rem;
+}
+
+.login--header img {
+    height: 22rem;
+}
+
+.loginsignin {
+    border: 6px solid rgba(221, 216, 216, 0.5);
+    padding:  1rem;
+}
+
+.login--text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 2rem;
+    margin-bottom: 2.3rem;
+    color: #3c009d;
+    font-size: 2.1rem;
+}
+
+.login--inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 1.8rem;
+    padding: 1rem;
+}
+
+.login--inputs input {
+    display: flex;
+    align-items: center;
+    margin: auto;
+    width: 20rem;
+    height: 4rem;
+    padding: .7rem;
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+    font-size: 1.2rem;
+    
+}
+
+.forgot--password {
+    margin-left: 1rem;
+    color: #797979;
+    margin-top: 1.3rem;
+    cursor: pointer;
+    align-self:flex-start;
+}
+
+.submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: aliceblue;
+    width: 16rem;
+    height: 2.8rem;
+    margin-top: 1.7rem;
+    background-color: #4c00b4;
+    border-radius: 1rem;
+    cursor: pointer;
+}
+
+.grey {
+    background: #eaeaea;
+    color: #676767;
+}
