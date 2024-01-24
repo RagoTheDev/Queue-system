@@ -19,7 +19,7 @@ function LogInAndsignIn() {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (form.email !== "" && form.password !== "") {
-          auth.signin(form);
+          auth.signin(form.email, form.password);
           return;
         }
         alert("please provide a valid input")

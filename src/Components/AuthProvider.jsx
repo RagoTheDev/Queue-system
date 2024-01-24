@@ -23,8 +23,7 @@ export function AuthProvider({ children }) {
           });
           const res = await response.json();
           const token = res.token ;
-          console.log("this is token", token, "this is res", res)
-
+       
           if (res) {
             setToken(token);
             localStorage.setItem("site", token);
