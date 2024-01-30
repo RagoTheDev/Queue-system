@@ -109,9 +109,27 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 6rem;    
+    margin-top: 3.5rem; 
+   cursor: pointer;   
 }
 
+.signout {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    
+}
+
+.signout button {
+    width: 130px;
+    cursor: pointer;
+    background-color: #097bec;
+    border: none;
+    padding: .3rem;
+    border-radius: 3px;
+}
 .header--text {
     grid-column: 2;
     display: flex;
@@ -139,8 +157,8 @@ body{
 
 .allcards {
     display: grid;
-    gap: 1.5rem;
-    margin-left: 3rem;
+    gap: 1rem;
+    margin-left: 1.2rem;
 }
 
 

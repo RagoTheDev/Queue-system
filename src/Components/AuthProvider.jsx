@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 let AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
-    let [token, setToken] = useState(null);
+    let [token, setToken] = useState(localStorage.getItem("site") || "");
     let navigate = useNavigate();
 
     const signin = async (email, password) => {
@@ -37,7 +37,8 @@ export function AuthProvider({ children }) {
 
     let signout = () => {
         setToken(null);
-        return navigate("/")
+        localStorage.removeItem("site")
+        return navigate("/login")
     };
 
     let value = {token, signin, signout};
