@@ -27,7 +27,7 @@ export function AuthProvider({ children }) {
           if (res) {
             setToken(token);
             localStorage.setItem("site", token);
-            return navigate("/Home");
+            return navigate("/Dashboard");
           }
           
         } catch (err) {
@@ -38,7 +38,7 @@ export function AuthProvider({ children }) {
     let signout = () => {
         setToken(null);
         localStorage.removeItem("site")
-        return navigate("/login")
+        return navigate("/")
     };
 
     let value = {token, signin, signout};
