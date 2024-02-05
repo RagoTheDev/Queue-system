@@ -1,29 +1,43 @@
 import React from 'react';
 import './App.css';
-import { Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Route, Router, Routes } from 'react-router-dom';
 import Dashboard from './Pages/Dashboard';
 import Login from './Pages/Login';
 import { AuthProvider } from './Components/AuthProvider';
-import { PrivateRoute } from './Components/PrivateRoute';
+import PrivateRoute  from './Components/PrivateRoute';
+import Doctors from './Pages/Doctors';
 
-function App() {
-  return (
+
+const App = () => {
+  return ( 
     <AuthProvider>
-       <div>
-        {" "}
-        <Routes>
+      <div>
+        {''}
+      <Routes>
           <Route path='/' element={<Login />} />
-          <Route 
-            path='/Dashboard' 
-            element={
-              <PrivateRoute>
-                 <Dashboard/>
-              </PrivateRoute>
-            } /> 
-        </Routes>
-       </div>
-     </AuthProvider>
+
+          <Route
+          path='Dashboard'
+          component={
+          <PrivateRoute
+            allowedRoles={['doctor']}>
+              <Dashboard />  
+          </PrivateRoute>
+          }
+          />
+          <Route
+          path='Doctors'
+          component={
+          <PrivateRoute
+            allowedRoles={['nurse']}>
+              <Doctors/>
+          </PrivateRoute>
+          }
+          />
+      </Routes>
+      </div>
+      </AuthProvider>
   );
-}
+};
 
 export default App;

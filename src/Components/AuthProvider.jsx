@@ -7,6 +7,7 @@ let AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
     let [token, setToken] = useState(localStorage.getItem("site") || "");
+    let [role, setRole] = useState(localStorage.getItem('site'))
     let navigate = useNavigate();
 
     const signin = async (email, password) => {
@@ -23,11 +24,18 @@ export function AuthProvider({ children }) {
           });
           const res = await response.json();
           const token = res.token ;
+          const role = res.role;
        
           if (res) {
             setToken(token);
-            localStorage.setItem("site", token);
-            return navigate("/Dashboard");
+            setRole(role);
+            localStorage.setItem("site", token, role);
+            if (role === "doctor"){
+              return navigate('/Dashboard')
+            } else {
+              return navigate ('/Doctors')
+            }
+          
           }
           
         } catch (err) {
@@ -41,7 +49,7 @@ export function AuthProvider({ children }) {
         return navigate("/")
     };
 
-    let value = {token, signin, signout};
+    let value = {token, role, signin, signout};
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
