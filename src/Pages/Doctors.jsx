@@ -2,8 +2,11 @@ import React, {useState} from 'react'
 import './Doctors.css'
 import searchIcon from '../Images/icons8.png'
 import doctor from'../Images/doctor.jpg'
+import { useAuth } from "../Components/AuthProvider"
 
 function Doctors() {
+
+      let auth = useAuth();
 
     const [search, setSearch] = useState('');
     return (
@@ -15,7 +18,7 @@ function Doctors() {
                     <h3>Doctors' List</h3>
                 </div>
                 <div className='nurse--logout'>
-                    <button>Log Out</button>
+                    <button onClickCapture={auth.signout}>Log Out</button>
                 </div>
             </div>
             <div className='nurse--main'>
