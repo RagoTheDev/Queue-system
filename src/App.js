@@ -1,10 +1,11 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter as Route, Router, Routes } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Dashboard from './Pages/Dashboard';
 import Login from './Pages/Login';
 import { AuthProvider } from './Components/AuthProvider';
-import PrivateRoute  from './Components/PrivateRoute';
+import {RequireDoctor}  from './Components/RequireDoctor';
+import { RequireNurse } from './Components/RequireNurse';
 import Doctors from './Pages/Doctors';
 
 
@@ -18,20 +19,18 @@ const App = () => {
 
           <Route
           path='Dashboard'
-          component={
-          <PrivateRoute
-            allowedRoles={['doctor']}>
+          element={
+          <RequireDoctor>
               <Dashboard />  
-          </PrivateRoute>
+          </RequireDoctor>
           }
           />
           <Route
           path='Doctors'
-          component={
-          <PrivateRoute
-            allowedRoles={['nurse']}>
+          element={
+          <RequireNurse>
               <Doctors/>
-          </PrivateRoute>
+          </RequireNurse>
           }
           />
       </Routes>

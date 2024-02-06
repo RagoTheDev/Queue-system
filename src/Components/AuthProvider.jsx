@@ -1,60 +1,48 @@
-import React, { useState } from 'react'
-import { createContext, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-
+import React, { useState } from "react";
+import { createContext,useContext } from "react"
+import { authGetToken } from "../auth"
+import { useNavigate} from "react-router-dom";
 
 let AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
-    let [token, setToken] = useState(localStorage.getItem("site") || "");
-    let [role, setRole] = useState(localStorage.getItem('site'))
-    let navigate = useNavigate();
 
-    const signin = async (email, password) => {
-        try {
-          const response = await fetch("https://appt.eadevs.com/login", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                email: email,
-                password: password,
-            }),
-          });
-          const res = await response.json();
-          const token = res.token ;
-          const role = res.role;
-       
-          if (res) {
-            setToken(token);
-            setRole(role);
-            localStorage.setItem("site", token, role);
-            if (role === "doctor"){
+  let [token, setToken] = useState(null);
+  let [role, setRole] = useState(null);
+  let navigate = useNavigate();
+
+  let signin = async(email,password) => {
+      const { token, role } = await authGetToken(email, password);
+      setToken(token);
+      setRole(role);
+      localStorage.setItem("qtoken", token);
+      localStorage.setItem("qrole", role);
+
+      if (role === "doctor"){
               return navigate('/Dashboard')
-            } else {
+      } else {
               return navigate ('/Doctors')
-            }
-          
-          }
-          
-        } catch (err) {
-          console.error(err);
-        }
-      };
+      }
+    
+    }
+  
 
-    let signout = () => {
-        setToken(null);
-        localStorage.removeItem("site")
-        return navigate("/")
+  let signout = () => {
+      setToken(null);
+      setRole(null);
+      localStorage.removeItem("qtoken");
+      localStorage.removeItem("qrole");
+      return navigate("/")
     };
+  ;
 
-    let value = {token, role, signin, signout};
+  let value = { token, role, signin, signout };
 
-    return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
 
+
 export function useAuth() {
-    return useContext(AuthContext)
+  return useContext(AuthContext);
 }
